@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,11 @@ public class ItemController {
 	@GetMapping("/get")
 	public List<Item> getItems() {
 		return this.service.getItem();
+	}
+
+	@PatchMapping("/update/{id}")
+	public ResponseEntity<Item> update(@PathVariable int id, @RequestBody Item newItem) {
+		return this.service.updateItem(id, newItem);
 	}
 
 	@DeleteMapping("/delete/{id}")

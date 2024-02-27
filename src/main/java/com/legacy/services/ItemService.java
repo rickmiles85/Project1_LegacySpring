@@ -1,6 +1,7 @@
 package com.legacy.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ public class ItemService {
 	// Check this works once Constructor is Set
 
 	private ItemRepo itemRepo;
+	private Item updatedName;
+	private Item updatedPrice;
+	private Item updatedQuantity;
 
 	public ItemService(ItemRepo itemRepo) {
 		super();
@@ -32,4 +36,37 @@ public class ItemService {
 		return this.itemRepo.findAll();
 
 	}
+
+	public boolean deleteItem(int id) {
+		this.itemRepo.deleteById(id);
+		return !this.itemRepo.existsById(id);
+	}
+
+	public ResponseEntity<Item> updateItem(int id, Item updatedItem) {
+
+		Optional<Item> found = this.itemRepo.findById(id);
+
+		if (found.isEmpty()) {
+			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+		}
+
+		Item existing = found.get();
+
+		if (updatedItem.getName() != null) {
+			existing.setName(updatedName.getName());
+		}
+
+		if (updatedItem.getPrice() != null) {
+			existing.setPrice(updatedPrice.getPrice());
+		}
+
+		if (updatedItem.getQuantity() != 0) {
+			existing.setQuantity(updatedQuantity.getQuantity());
+		}
+
+		Item updated = this.itemRepo.save(existing);
+
+		return ResponseEntity.ok(updated);
+	}
+
 }
