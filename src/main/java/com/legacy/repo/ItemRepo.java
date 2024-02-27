@@ -1,8 +1,8 @@
-package repo;
+package com.legacy.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import domain.Item;
+import com.legacy.domain.Item;
 
 public interface ItemRepo extends JpaRepository<Item, Integer> {
 

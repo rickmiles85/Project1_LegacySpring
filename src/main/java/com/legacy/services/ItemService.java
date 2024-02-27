@@ -1,4 +1,4 @@
-package services;
+package com.legacy.services;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import domain.Item;
-import repo.ItemRepo;
+import com.legacy.domain.Item;
+import com.legacy.repo.ItemRepo;
 
 @Service
 public class ItemService {

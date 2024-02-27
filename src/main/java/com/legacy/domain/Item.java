@@ -1,4 +1,4 @@
-package domain;
+package com.legacy.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package rest;
+package com.legacy.rest;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.Item;
-import services.ItemService;
+import com.legacy.domain.Item;
+import com.legacy.services.ItemService;
 
 @RestController
 @RequestMapping("/item")
