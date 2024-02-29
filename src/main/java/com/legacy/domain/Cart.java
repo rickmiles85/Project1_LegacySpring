@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 
-public class Item {
+public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -18,7 +18,7 @@ public class Item {
 
 	private int quantity;
 
-	public Item() {
+	public Cart() {
 		super();
 
 	}

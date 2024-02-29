@@ -11,9 +11,8 @@ import com.legacy.domain.Item;
 import com.legacy.repo.ItemRepo;
 
 @Service
-public class ItemService {
 
-	// Check this works once Constructor is Set
+public class ItemService {
 
 	private ItemRepo itemRepo;
 	private Item updatedName;
