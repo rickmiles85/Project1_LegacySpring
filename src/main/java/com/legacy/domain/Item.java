@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 
-public class Item {
+public abstract class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -54,5 +54,11 @@ public class Item {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public abstract int calcBill();
+
+//	public int calcBill() {
+//		return 0;
+//	}
 
 }

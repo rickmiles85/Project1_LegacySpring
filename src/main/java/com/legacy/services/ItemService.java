@@ -15,13 +15,9 @@ import com.legacy.repo.ItemRepo;
 public class ItemService {
 
 	private ItemRepo itemRepo;
-	private Item updatedName;
-	private Item updatedPrice;
-	private Item updatedQuantity;
 
 	public ItemService(ItemRepo itemRepo) {
 		super();
-
 		this.itemRepo = itemRepo;
 	}
 
@@ -42,29 +38,22 @@ public class ItemService {
 	}
 
 	public ResponseEntity<Item> updateItem(int id, Item updatedItem) {
-
 		Optional<Item> found = this.itemRepo.findById(id);
 
 		if (found.isEmpty()) {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
-
 		Item existing = found.get();
-
 		if (updatedItem.getName() != null) {
-			existing.setName(updatedName.getName());
+			existing.setName(updatedItem.getName());
 		}
-
 		if (updatedItem.getPrice() != null) {
-			existing.setPrice(updatedPrice.getPrice());
+			existing.setPrice(updatedItem.getPrice());
 		}
-
 		if (updatedItem.getQuantity() != 0) {
-			existing.setQuantity(updatedQuantity.getQuantity());
+			existing.setQuantity(updatedItem.getQuantity());
 		}
-
 		Item updated = this.itemRepo.save(existing);
-
 		return ResponseEntity.ok(updated);
 	}
 
