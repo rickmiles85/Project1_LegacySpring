@@ -41,6 +41,11 @@ public class ItemController {
 		return this.service.getItem();
 	}
 
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Item> getItem(@PathVariable int id) {
+		return this.service.getItem(id);
+	}
+
 	@PatchMapping("/update/{id}")
 	public ResponseEntity<Item> update(@PathVariable int id, @RequestBody Item newItem) {
 		return this.service.updateItem(id, newItem);

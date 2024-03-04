@@ -29,7 +29,15 @@ public class ItemService {
 
 	public List<Item> getItem() {
 		return this.itemRepo.findAll();
+	}
 
+	public ResponseEntity<Item> getItem(int id) {
+		Optional<Item> found = this.itemRepo.findById(id);
+		if (found.isEmpty()) {
+			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+		}
+		Item body = found.get();
+		return ResponseEntity.ok(body);
 	}
 
 	public boolean deleteItem(int id) {
