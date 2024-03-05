@@ -61,6 +61,9 @@ public class ItemService {
 		if (updatedItem.getQuantity() != 0) {
 			existing.setQuantity(updatedItem.getQuantity());
 		}
+		if (updatedItem.getImage() != null) {
+			existing.setImage(updatedItem.getImage());
+		}
 		Item updated = this.itemRepo.save(existing);
 		return ResponseEntity.ok(updated);
 	}

@@ -18,9 +18,19 @@ public class Cart {
 
 	private int quantity;
 
+	private String image;
+
 	public Cart() {
 		super();
 
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Integer getId() {

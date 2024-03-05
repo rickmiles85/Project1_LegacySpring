@@ -36,6 +36,15 @@ public class CartService {
 
 	}
 
+	public ResponseEntity<Cart> getCart(int id) {
+		Optional<Cart> found = this.cartRepo.findById(id);
+		if (found.isEmpty()) {
+			return new ResponseEntity<Cart>(HttpStatus.NOT_FOUND);
+		}
+		Cart body = found.get();
+		return ResponseEntity.ok(body);
+	}
+
 	public boolean deleteCart(int id) {
 		this.cartRepo.deleteById(id);
 		return !this.cartRepo.existsById(id);
@@ -61,6 +70,9 @@ public class CartService {
 
 		if (updatedCart.getQuantity() != 0) {
 			existing.setQuantity(updatedCart.getQuantity());
+		}
+		if (updatedCart.getImage() != null) {
+			existing.setImage(updatedCart.getImage());
 		}
 
 		Cart updated = this.cartRepo.save(existing);

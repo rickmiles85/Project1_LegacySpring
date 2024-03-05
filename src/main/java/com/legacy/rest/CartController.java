@@ -41,6 +41,11 @@ public class CartController {
 		return this.service.getCart();
 	}
 
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Cart> getCart(@PathVariable int id) {
+		return this.service.getCart(id);
+	}
+
 	@PatchMapping("/update/{id}")
 	public ResponseEntity<Cart> update(@PathVariable int id, @RequestBody Cart newCart) {
 		return this.service.updateCart(id, newCart);
