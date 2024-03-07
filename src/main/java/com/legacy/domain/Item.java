@@ -1,9 +1,12 @@
 package com.legacy.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 
@@ -20,9 +23,21 @@ public class Item {
 
 	private String image;
 
+	@JsonBackReference
+	@ManyToOne
+	private Cart cart;
+
 	public Item() {
 		super();
 
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	public String getImage() {
