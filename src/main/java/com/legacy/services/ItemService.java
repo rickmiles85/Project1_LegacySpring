@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.legacy.domain.Cart;
 import com.legacy.domain.Item;
+import com.legacy.repo.CartRepo;
 import com.legacy.repo.ItemRepo;
 
 @Service
@@ -15,6 +17,17 @@ import com.legacy.repo.ItemRepo;
 public class ItemService {
 
 	private ItemRepo itemRepo;
+	private CartRepo repo;
+
+	public ItemService() {
+		super();
+	}
+
+	public ItemService(ItemRepo itemRepo, CartRepo repo) {
+		super();
+		this.repo = repo;
+		this.itemRepo = itemRepo;
+	}
 
 	public ItemService(ItemRepo itemRepo) {
 		super();
@@ -66,6 +79,29 @@ public class ItemService {
 		}
 		Item updated = this.itemRepo.save(existing);
 		return ResponseEntity.ok(updated);
+	}
+
+	public ResponseEntity<Item> addItemToCart(int cartId, Item newItem) {
+		Optional<Cart> optionalCart = repo.findById(cartId);
+		if (optionalCart.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		Cart cart = optionalCart.get();
+
+		if (optionalCart.isEmpty()) {
+
+			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+		}
+		Optional<Item> found = this.itemRepo.findById(newItem.getId());
+
+		Item item = found.get();
+
+		item.setCart(cart);
+		Item savedItem = this.itemRepo.save(item);
+
+		return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
+
 	}
 
 }

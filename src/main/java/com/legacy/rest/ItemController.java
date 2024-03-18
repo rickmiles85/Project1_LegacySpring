@@ -55,4 +55,9 @@ public class ItemController {
 	public boolean deleteItem(@PathVariable int id) {
 		return this.service.deleteItem(id);
 	}
+
+	@PostMapping("/addItem/{cartId}")
+	public ResponseEntity<Item> addItemToCustomer(@PathVariable int cartId, @RequestBody Item newItem) {
+		return this.service.addItemToCart(cartId, newItem);
+	}
 }

@@ -50,42 +50,4 @@ public class CartService {
 		return !this.cartRepo.existsById(id);
 	}
 
-	public ResponseEntity<Cart> updateCart(int id, Cart updatedCart) {
-
-		Optional<Cart> found = this.cartRepo.findById(id);
-
-		if (found.isEmpty()) {
-			return new ResponseEntity<Cart>(HttpStatus.NOT_FOUND);
-		}
-
-		Cart existing = found.get();
-
-		if (updatedCart.getName() != null) {
-			existing.setName(updatedCart.getName());
-		}
-
-		if (updatedCart.getPrice() != null) {
-			existing.setPrice(updatedCart.getPrice());
-		}
-
-		if (updatedCart.getQuantity() != 0) {
-			existing.setQuantity(updatedCart.getQuantity());
-		}
-		if (updatedCart.getImage() != null) {
-			existing.setImage(updatedCart.getImage());
-		}
-
-		Cart updated = this.cartRepo.save(existing);
-
-		return ResponseEntity.ok(updated);
-	}
-
-	public int calcBill() {
-		int totalBill = 0;
-		for (Item item : items) {
-			totalBill += item.calcBill();
-		}
-		return totalBill;
-	}
-
 }
