@@ -19,18 +19,9 @@ public class ItemService {
 	private ItemRepo itemRepo;
 	private CartRepo repo;
 
-	public ItemService() {
-		super();
-	}
-
 	public ItemService(ItemRepo itemRepo, CartRepo repo) {
 		super();
 		this.repo = repo;
-		this.itemRepo = itemRepo;
-	}
-
-	public ItemService(ItemRepo itemRepo) {
-		super();
 		this.itemRepo = itemRepo;
 	}
 
