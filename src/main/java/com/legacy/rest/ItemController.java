@@ -57,7 +57,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/addItem/{cartId}")
-	public ResponseEntity<Item> addItemToCustomer(@PathVariable int cartId, @RequestBody Item newItem) {
+	public ResponseEntity<Item> addItemToCart(@PathVariable int cartId, @RequestBody Item newItem) {
 		return this.service.addItemToCart(cartId, newItem);
 	}
 }
