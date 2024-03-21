@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,11 +43,6 @@ public class CartController {
 	@GetMapping("/get/{id}")
 	public ResponseEntity<Cart> getCart(@PathVariable int id) {
 		return this.service.getCart(id);
-	}
-
-	@PatchMapping("/update/{id}")
-	public ResponseEntity<Cart> update(@PathVariable int id, @RequestBody Cart newCart) {
-		return this.service.updateCart(id, newCart);
 	}
 
 	@DeleteMapping("/delete/{id}")
