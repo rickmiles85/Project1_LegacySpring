@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AddItem {
+public class UpdateItem {
 
 	private RemoteWebDriver driver;
 	private WebDriverWait wait;
@@ -29,35 +29,49 @@ public class AddItem {
 	}
 
 	@Test
-	@Order(1)
-	void createItem() {
+	@Order(2)
+	void updateItem() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 
 		WebElement items = this.driver.findElement(By.cssSelector("#root > div > nav > ul > li:nth-child(3) > a"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", items);
 		items.click();
 
-		WebElement name = this.driver.findElement(By.cssSelector("#name"));
+		WebElement update = this.driver.findElement(By.cssSelector("#update"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", update);
+		update.click();
+
+		WebElement name = this.driver.findElement(By.cssSelector("#Name"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", name);
-		name.sendKeys("Apple iPhone");
+		name.clear();
+		name.sendKeys("Samsung S24 Galaxy");
 
 		WebElement price = this.driver.findElement(By.cssSelector("#price"));
-		price.sendKeys("599");
+		price.clear();
+		price.sendKeys("799");
 
 		WebElement quantity = this.driver.findElement(By.cssSelector("#quantity"));
-		quantity.sendKeys("10");
+		quantity.clear();
+		quantity.sendKeys("55");
 
 		WebElement image = this.driver.findElement(By.cssSelector("#image"));
+		image.clear();
 		image.sendKeys(
 				"https://images.samsung.com/is/image/samsung/assets/uk/smartphones/galaxy-s23-fe/buy/05-colour-selections/basic-colour/S23-FE_Color-Selection_Mint_mo.jpg?imwidth=480");
 
-		WebElement submit = this.driver.findElement(By.cssSelector("#submit"));
+		WebElement submit = this.driver.findElement(By.cssSelector("#editSubmit"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submit);
 		submit.click();
 
-		WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#q")));
+		Thread.sleep(3000);
+
+		WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#itemName")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", item);
-		Assertions.assertEquals(true, item.getText().contains("Quantity"));
+		Assertions.assertEquals(true, item.getText().contains("Samsung S24 Galaxy"));
+
+//		WebElement itemQ = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#q")));
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemQ);
+//		Assertions.assertEquals("55", itemQ.getText());
 
 	}
 
@@ -65,4 +79,5 @@ public class AddItem {
 	void closePage() {
 		this.driver.quit();
 	}
+
 }
