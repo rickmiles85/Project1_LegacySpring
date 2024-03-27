@@ -63,15 +63,22 @@ public class UpdateItem {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submit);
 		submit.click();
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 
-		WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#itemName")));
+		WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > div > div > div:nth-child(3) > div > table > tbody > tr:nth-child(1) > td:nth-child(1)")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", item);
 		Assertions.assertEquals(true, item.getText().contains("Samsung S24 Galaxy"));
 
-//		WebElement itemQ = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#q")));
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemQ);
-//		Assertions.assertEquals("55", itemQ.getText());
+		WebElement itemP = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > div > div > div:nth-child(3) > div > table > tbody > tr:nth-child(1) > td:nth-child(2)")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemP);
+		Assertions.assertEquals(true, itemP.getText().contains("799"));
+
+		WebElement itemQ = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#root > div > div > div > div:nth-child(3) > div > table > tbody > tr:nth-child(1) > td:nth-child(3)")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", itemQ);
+		Assertions.assertEquals(true, itemQ.getText().contains("55"));
 
 	}
 
