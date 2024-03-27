@@ -16,27 +16,27 @@ import com.legacy.repo.ItemRepo;
 
 public class ItemService {
 
-	private ItemRepo itemRepo;
-	private CartRepo repo;
+	private ItemRepo repo;
+	private CartRepo cartRepo;
 
-	public ItemService(ItemRepo itemRepo, CartRepo repo) {
+	public ItemService(ItemRepo repo, CartRepo cartRepo) {
 		super();
 		this.repo = repo;
-		this.itemRepo = itemRepo;
+		this.setCartRepo(cartRepo);
 	}
 
 	public ResponseEntity<Item> createItem(Item newItem) {
 
-		Item created = this.itemRepo.save(newItem);
+		Item created = this.repo.save(newItem);
 		return new ResponseEntity<Item>(created, HttpStatus.CREATED);
 	}
 
 	public List<Item> getItem() {
-		return this.itemRepo.findAll();
+		return this.repo.findAll();
 	}
 
 	public ResponseEntity<Item> getItem(int id) {
-		Optional<Item> found = this.itemRepo.findById(id);
+		Optional<Item> found = this.repo.findById(id);
 		if (found.isEmpty()) {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
@@ -45,12 +45,12 @@ public class ItemService {
 	}
 
 	public boolean deleteItem(int id) {
-		this.itemRepo.deleteById(id);
-		return !this.itemRepo.existsById(id);
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
 	}
 
 	public ResponseEntity<Item> updateItem(int id, Item updatedItem) {
-		Optional<Item> found = this.itemRepo.findById(id);
+		Optional<Item> found = this.repo.findById(id);
 
 		if (found.isEmpty()) {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
@@ -68,12 +68,12 @@ public class ItemService {
 		if (updatedItem.getImage() != null) {
 			existing.setImage(updatedItem.getImage());
 		}
-		Item updated = this.itemRepo.save(existing);
+		Item updated = this.repo.save(existing);
 		return ResponseEntity.ok(updated);
 	}
 
 	public ResponseEntity<Item> addItemToCart(int cartId, Item newItem) {
-		Optional<Cart> optionalCart = repo.findById(cartId);
+		Optional<Cart> optionalCart = cartRepo.findById(cartId);
 		if (optionalCart.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -84,15 +84,23 @@ public class ItemService {
 
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
-		Optional<Item> found = this.itemRepo.findById(newItem.getId());
+		Optional<Item> found = this.repo.findById(newItem.getId());
 
 		Item item = found.get();
 
 		item.setCart(cart);
-		Item savedItem = this.itemRepo.save(item);
+		Item savedItem = this.repo.save(item);
 
 		return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
 
+	}
+
+	public CartRepo getCartRepo() {
+		return cartRepo;
+	}
+
+	public void setCartRepo(CartRepo cartRepo) {
+		this.cartRepo = cartRepo;
 	}
 
 }

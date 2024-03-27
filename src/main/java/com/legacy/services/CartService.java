@@ -50,4 +50,12 @@ public class CartService {
 		return !this.cartRepo.existsById(id);
 	}
 
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<Item> items) {
+		this.items = items;
+	}
+
 }
