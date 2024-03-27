@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AddItem {
+public class AddCart {
 
 	private RemoteWebDriver driver;
 	private WebDriverWait wait;
@@ -29,35 +29,26 @@ public class AddItem {
 	}
 
 	@Test
-	@Order(1)
-	void createItem() {
+	@Order(3)
+	void createCart() {
 		this.driver.get("http://localhost:3000/");
 
-		WebElement items = this.driver.findElement(By.cssSelector("#root > div > nav > ul > li:nth-child(4) > a"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", items);
-		items.click();
+		WebElement baskets = this.driver
+				.findElement(By.cssSelector("#root > div > nav > ul > a:nth-child(2) > div > span"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", baskets);
+		baskets.click();
 
-		WebElement name = this.driver.findElement(By.cssSelector("#name"));
+		WebElement name = this.driver.findElement(By.cssSelector("#Name"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", name);
-		name.sendKeys("Apple iPhone");
-
-		WebElement price = this.driver.findElement(By.cssSelector("#price"));
-		price.sendKeys("599");
-
-		WebElement quantity = this.driver.findElement(By.cssSelector("#quantity"));
-		quantity.sendKeys("10");
-
-		WebElement image = this.driver.findElement(By.cssSelector("#image"));
-		image.sendKeys(
-				"https://images.samsung.com/is/image/samsung/assets/uk/smartphones/galaxy-s23-fe/buy/05-colour-selections/basic-colour/S23-FE_Color-Selection_Mint_mo.jpg?imwidth=480");
+		name.sendKeys("New Basket Test");
 
 		WebElement submit = this.driver.findElement(By.cssSelector("#submit"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submit);
 		submit.click();
 
-		WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#q")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", item);
-		Assertions.assertEquals(true, item.getText().contains("Quantity"));
+		WebElement newCart = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#cartName")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", newCart);
+		Assertions.assertEquals(true, newCart.getText().contains("New Basket Test"));
 
 	}
 

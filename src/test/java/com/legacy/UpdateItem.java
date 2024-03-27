@@ -33,7 +33,7 @@ public class UpdateItem {
 	void updateItem() throws InterruptedException {
 		this.driver.get("http://localhost:3000/");
 
-		WebElement items = this.driver.findElement(By.cssSelector("#root > div > nav > ul > li:nth-child(3) > a"));
+		WebElement items = this.driver.findElement(By.cssSelector("#root > div > nav > ul > li:nth-child(4) > a"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", items);
 		items.click();
 
